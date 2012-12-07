@@ -2,7 +2,13 @@ require 'rake'
 require 'erb'
 
 desc "install the dot files into user's home directory"
-task :install do
+task :install, :stdanswer do |t, args|
+  stdanswer = args[:stdanswer]
+  if (stdanswer == "y") 
+    @ghusername = "k9ert"
+    @name = "Kim Neunert"
+    @email = "k9ert@gmx.de"
+  end
   replace_all = false
   Dir['*'].each do |file|
     next if %w[Rakefile README.rdoc LICENSE].include? file
@@ -14,7 +20,7 @@ task :install do
         replace_file(file)
       else
         print "overwrite ~/.#{file.sub('.erb', '')}? [ynaq] "
-        case $stdin.gets.chomp
+        case stdanswer or $stdin.gets.chomp
         when 'a'
           replace_all = true
           replace_file(file)
