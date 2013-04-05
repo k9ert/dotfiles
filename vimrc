@@ -205,3 +205,5 @@ function! OpenURL()
 endfunction
 map <Leader>w :call OpenURL()<CR>
 
+# for puppet indention
+filetype plugin indent on
